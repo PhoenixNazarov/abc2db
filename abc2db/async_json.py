@@ -69,6 +69,12 @@ class AsyncJson(AsyncRepository):
             models.sort(key=lambda j: j.dict(include={sort_key})[sort_key], reverse=desc)
         return models
 
+    async def remove(self, model):
+        self._load()
+        self._base.pop(model.id)
+        self._save()
+        return model
+
 
 def abc2db_async_json(abc_class: type) -> type:
     return build_repository_impl(abc_class, AsyncJson)

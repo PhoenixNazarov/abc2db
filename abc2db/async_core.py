@@ -24,3 +24,7 @@ class AsyncRepository(ABC):
     @abstractmethod
     async def find_by(self, key: str, value, sort_key: [Callable] = None, desc: [bool] = None) -> list[BaseModel]:
         """find in base by"""
+
+    @abstractmethod
+    async def remove(self, model: BaseModel):
+        """remove model from base"""

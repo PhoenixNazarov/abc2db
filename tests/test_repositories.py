@@ -58,6 +58,10 @@ class UserRepository(ABC):
     def find_by_ref_id_sort_by_id_desc(self, ref_id: int) -> list[User]:
         ...
 
+    @abstractmethod
+    def remove(self, model: User) -> None:
+        ...
+
 
 class TestRepositoryMemory(unittest.TestCase):
     def setUp(self) -> None:
@@ -147,3 +151,12 @@ class TestRepositoryMemory(unittest.TestCase):
                 self.assertEqual(repo.find_by_ref_id_sort_by_id(2), [user3])
                 self.assertEqual(repo.find_by_ref_id_sort_by_id(1), [user1, user2])
                 self.assertEqual(repo.find_by_ref_id_sort_by_id_desc(1), [user2, user1])
+
+    def test_remove(self):
+        user1 = User(name='user1', ref_id=1)
+        for repo in self.repositories:
+            with self.subTest(msg=f'{type(repo)}'):
+                repo.save(user1)
+                self.assertEqual(repo.find(user1.id), user1)
+                repo.remove(user1)
+                self.assertIsNone(repo.find(user1.id))

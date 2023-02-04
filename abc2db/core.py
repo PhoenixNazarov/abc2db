@@ -25,6 +25,10 @@ class Repository(ABC):
     def find_by(self, key: str, value, sort_key: [str] = None, desc: [bool] = None) -> list[BaseModel]:
         """find in base by"""
 
+    @abstractmethod
+    def remove(self, model: BaseModel):
+        """remove model from base"""
+
 
 def _find_sort_values(string: str) -> dict:
     vals = {
@@ -65,6 +69,8 @@ def build_repository_impl(abc_class, repository_impl) -> type:
             attrs.update({'find': impl_dict['find']})
         elif k == 'save':
             attrs.update({'save': impl_dict['save']})
+        elif k == 'remove':
+            attrs.update({'remove': impl_dict['remove']})
         elif k == 'save_all':
             attrs.update({'save_all': impl_dict['save_all']})
         elif k.startswith('find_by'):
