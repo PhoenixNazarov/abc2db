@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='abc2db',
-    version='1.0.0',
+    version='1.0.1',
     packages=['abc2db'],
     url='',
     license='',

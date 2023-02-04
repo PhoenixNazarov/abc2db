@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 from pydantic import BaseModel
 
-from abc2db.asyncio import abc2db_memory, abc2db_json
+from abc2db import abc2db_async_memory, abc2db_async_json
 
 
 class User(BaseModel):
@@ -61,10 +61,10 @@ class UserRepository(ABC):
 
 class TestRepositoryMemory(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self) -> None:
-        UserRepositoryMemory = abc2db_memory(UserRepository)
+        UserRepositoryMemory = abc2db_async_memory(UserRepository)
         with open('users.json', 'w') as file:
             file.write('{}')
-        UserRepositoryJson = abc2db_json(UserRepository)
+        UserRepositoryJson = abc2db_async_json(UserRepository)
 
         self.repositories: list[UserRepository] = [
             UserRepositoryMemory(),

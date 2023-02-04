@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 import json
-from .core import AsyncRepository
-from ..core import build_repository_impl
+from .async_core import AsyncRepository
+from abc2db.core import build_repository_impl
 
 
 class AsyncJson(AsyncRepository):
@@ -70,5 +70,5 @@ class AsyncJson(AsyncRepository):
         return models
 
 
-def abc2db_json(abc_class: type) -> type:
+def abc2db_async_json(abc_class: type) -> type:
     return build_repository_impl(abc_class, AsyncJson)
