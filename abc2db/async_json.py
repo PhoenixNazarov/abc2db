@@ -43,6 +43,8 @@ class AsyncJson(AsyncRepository):
             model.id = self._id
             self._id += 1
         self._base[model.id] = model
+        if model.id >= self._id:
+            self._id = model.id + 1
         self._save()
         return model
 
