@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Callable, get_type_hints
+from typing import get_type_hints
 
 from pydantic import BaseModel
 
@@ -18,11 +18,11 @@ class Repository(ABC):
         """save models in base"""
 
     @abstractmethod
-    def find_all(self, sort_key: [Callable] = None, desc: [bool] = None) -> list[BaseModel]:
+    def find_all(self, sort_key: [str] = None, desc: [bool] = None) -> list[BaseModel]:
         """find all model in base"""
 
     @abstractmethod
-    def find_by(self, key: str, value, sort_key: [Callable] = None, desc: [bool] = None) -> list[BaseModel]:
+    def find_by(self, key: str, value, sort_key: [str] = None, desc: [bool] = None) -> list[BaseModel]:
         """find in base by"""
 
 

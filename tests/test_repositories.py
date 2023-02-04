@@ -94,6 +94,7 @@ class TestRepositoryMemory(unittest.TestCase):
                 repo.save(user1)
                 self.assertEqual(repo.find(user1.id), user1)
                 user1.name = 'user2'
+                repo.save(user1)
                 self.assertEqual(repo.find(user1.id), user1)
 
     def test_save_all(self):
